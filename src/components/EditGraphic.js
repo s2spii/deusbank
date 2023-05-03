@@ -1,5 +1,5 @@
 import { Button, Collapse, Input, Modal } from "@nextui-org/react";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import NewBillForm from "./NewBillForm";
 import { useDispatch, useSelector } from "react-redux";
 import { isEmpty } from "./Utils";
