@@ -27,11 +27,6 @@ app.use("/api/user", require("./routes/user.routes"));
 app.use("/api/bills", require("./routes/userData.routes"));
 app.use("/api/history", require("./routes/history.routes"));
 
-app.use(express.static(path.join(__dirname, "../build")));
-
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../build", "index.html"));
-});
 
 sequelize
   .sync()
