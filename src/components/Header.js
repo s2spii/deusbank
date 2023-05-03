@@ -9,12 +9,7 @@ import {
   NotificationManager,
 } from "react-notifications";
 import "react-notifications/lib/notifications.css";
-import {
-  setEmail,
-  setPassword,
-  setSalary,
-  setUsername,
-} from "../actions/user.action";
+import { setEmail, setSalary, setUsername } from "../actions/user.action";
 import ChangeSet from "./ChangeSet";
 
 const Header = ({ isEdit, setIsEdit }) => {
@@ -29,7 +24,6 @@ const Header = ({ isEdit, setIsEdit }) => {
   const [selectedContent, setSelectedContent] = useState("");
   const [changedUsername, setChangedUsername] = useState("");
   const [changedEmail, setChangedEmail] = useState("");
-  const [changedPassword, setChangedPassword] = useState("");
 
   const handleChangeUsername = () => {
     if (changedUsername === userName) {
@@ -90,31 +84,6 @@ const Header = ({ isEdit, setIsEdit }) => {
       NotificationManager.error(
         "Veuillez entrer une adresse email",
         "Adresse email",
-        5000
-      );
-    }
-  };
-
-  const handleChangePassword = () => {
-    if (changedPassword) {
-      try {
-        // Dispatch action to update password
-        dispatch(setPassword(changedPassword));
-        setChangedPassword("");
-        NotificationManager.success(
-          "Votre mot de passe a bien été modifié",
-          "Mot de passe",
-          3000
-        );
-        return;
-      } catch (err) {
-        console.log("Erreur: " + err);
-        return;
-      }
-    } else {
-      NotificationManager.error(
-        "Veuillez entrer un mot de passe",
-        "Mot de passe",
         5000
       );
     }
