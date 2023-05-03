@@ -1,0 +1,30 @@
+.header {
+  padding: 0 20px;
+  background-color: $col-blue;
+  max-height: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .title {
+    font-family: $inter;
+    color: white;
+    text-transform: capitalize;
+  }
+
+  .navigation {
+    display: flex;
+    gap: 25px;
+
+    a {
+      background-color: $col-silver;
+      padding: 5px 10px;
+      border-radius: 17px;
+      transition: 0.3s;
+
+      &:hover {
+        background-color: $col-darkBlue;
+      }
+    }
+  }
+}

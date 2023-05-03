@@ -1,0 +1,66 @@
+@import url("https://fonts.googleapis.com/css2?family=Bruno+Ace+SC&family=Inter:wght@900&display=swap");
+
+$col-breakedWhite: rgb(241, 246, 249);
+$col-blue: rgb(57, 72, 103);
+$col-darkBlue: rgb(33, 42, 62);
+$col-silver: rgb(155, 164, 181);
+$col-silver-hover: rgba(155, 164, 181, 0.41);
+
+$inter: "Inter";
+
+body {
+  margin: 0;
+  background-color: $col-breakedWhite;
+}
+
+body,
+html {
+  height: 100%;
+  position: relative;
+}
+
+#reactgooglegraph-1 {
+  rect {
+    background-color: $col-breakedWhite !important;
+  }
+}
+
+.font-title {
+  font-family: $inter;
+}
+
+.hover-scale {
+  transition: transform 0.3;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+.no-margin-no-padding {
+  margin: 0;
+  padding: 0;
+}
+
+.margin-10-no-padding {
+  margin: 10px;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+.nav-active {
+  transition: 0.3s;
+  background-color: $col-darkBlue !important;
+}
+
+.click {
+  cursor: pointer;
+  transition: 0.3s;
+  &:hover {
+    background-color: $col-blue !important;
+  }
+}

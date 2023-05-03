@@ -1,0 +1,63 @@
+.background-angle {
+  background-color: white;
+  width: 40vw;
+  height: 50vh;
+  position: absolute;
+  z-index: -1;
+}
+
+.background-angle.top {
+  clip-path: polygon(100% 0, 0% 100%, 0 0);
+  top: 0;
+  left: 0;
+}
+
+.background-angle.bottom {
+  clip-path: polygon(100% 0, 0% 100%, 100% 100%);
+  right: 0;
+  bottom: 0;
+}
+
+.contact-us {
+  height: calc(100vh - 80px);
+  display: grid;
+  place-items: center;
+  grid-template-columns: 0.7fr 1fr;
+
+  .email-form {
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    width: 50%;
+    border-radius: 50px;
+    background: linear-gradient(145deg, #d9dde0, #ffffff);
+    box-shadow: 35px 35px 70px #cdd1d4, -35px -35px 70px #ffffff;
+
+    h2 {
+      font-family: $inter;
+      margin: 10px;
+      margin-bottom: 0;
+    }
+  }
+  .right-side-contact {
+    figure {
+      display: flex;
+      flex-direction: column-reverse;
+      align-items: center;
+      justify-content: center;
+
+      img {
+        user-select: none;
+      }
+
+      figcaption {
+        font-size: 3rem;
+        font-family: "Bruno Ace SC", sans-serif;
+        font-weight: bold;
+        transform: translateY(20px);
+        user-select: none;
+      }
+    }
+  }
+}
