@@ -1,10 +1,8 @@
 const { CronJob } = require("cron");
 const timeZone = "Europe/Paris";
-
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
-const path = require("path");
 const sequelize = require("./config/db");
 const { transferBillsToHistory } = require("./controllers/userData.controller");
 require("dotenv").config();
@@ -17,7 +15,7 @@ app.use(cookieParser());
 
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: process.env.ORIGIN_CORS,
     credentials: true,
   })
 );
@@ -26,7 +24,6 @@ app.use(
 app.use("/api/user", require("./routes/user.routes"));
 app.use("/api/bills", require("./routes/userData.routes"));
 app.use("/api/history", require("./routes/history.routes"));
-
 
 sequelize
   .sync()
