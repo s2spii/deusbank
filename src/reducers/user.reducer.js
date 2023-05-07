@@ -23,6 +23,11 @@ export default function userReducer(state = initialState, action) {
         ...state,
         current: { ...state.current, email: action.payload },
       };
+    case "SET_BIRTHDAY":
+      return {
+        ...state,
+        current: { ...state.current, birthday: action.payload },
+      };
     case "SET_PASSWORD":
       return {
         ...state,

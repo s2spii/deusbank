@@ -14,9 +14,19 @@ const ProfilModal = ({ visible, setVisible, setIsEdit }) => {
   const [changedEmail, setChangedEmail] = useState("");
   const userEmail = useSelector((state) => state.user.current.email);
   const userImage = useSelector((state) => state.user.current.img);
-  const salary = useSelector((state) => state.user.current.salary);
+  const userBirthday = useSelector((state) => state.user.current.birthday);
+
   const [newSalary, setNewSalary] = useState();
   const userName = useSelector((state) => state.user.current.username);
+  const [date, setDate] = useState("");
+
+  const handleSelect = (value) => {
+    if (selectedContent === value) {
+      setSelectedContent("");
+    } else {
+      setSelectedContent(value);
+    }
+  };
 
   const handleChangeUsername = () => {
     if (changedUsername === userName) {
@@ -82,11 +92,33 @@ const ProfilModal = ({ visible, setVisible, setIsEdit }) => {
     }
   };
 
-  const handleSelect = (value) => {
-    if (selectedContent === value) {
-      setSelectedContent("");
-    } else {
-      setSelectedContent(value);
+  const handleDateChange = (e) => {
+    const value = e.target.value;
+    const formattedValue = value
+      .replace(/\D/g, "")
+      .replace(/(\d{2})(\d)/, "$1/$2")
+      .replace(/(\d{2})\/(\d{2})(\d)/, "$1/$2/$3")
+      .substring(0, 10);
+
+    setDate(formattedValue);
+  };
+
+  const handleChangeBirthday = () => {
+    if (date === userBirthday) {
+      NotificationManager.error(
+        "La date de naissance doit être différente de celle définie initialement",
+        "Date de naissance",
+        5000
+      );
+      return;
+    }
+    if (date.length < 10) {
+      NotificationManager.error(
+        "La date de naissance définie est incorrecte",
+        "Date de naissance",
+        5000
+      );
+      return;
     }
   };
 
@@ -144,7 +176,7 @@ const ProfilModal = ({ visible, setVisible, setIsEdit }) => {
             </ul>
           </div>
           <div className="account-modal-body-content">
-            {selectedContent === "infos" ? (
+            {selectedContent === "profil" ? (
               <>
                 {userImage ? (
                   <image
@@ -191,34 +223,29 @@ const ProfilModal = ({ visible, setVisible, setIsEdit }) => {
                   value={changedEmail}
                   onChange={(e) => setChangedEmail(e.target.value)}
                 />
-
-                {/* <Input
-                    aria-label="change password"
-                    labelLeft={<i className="fa-solid fa-lock"></i>}
-                    contentRightStyling={false}
-                    contentRight={
-                      <i
-                        className="fa-solid fa-right-long"
-                        onClick={handleChangePassword}
-                      ></i>
-                    }
-                    type="password"
-                    placeholder="Nouveau mot de passe"
-                    status="primary"
-                    value={changedPassword}
-                    onChange={(e) => setChangedPassword(e.target.value)}
-                  /> */}
+                <Input
+                  status="primary"
+                  value={date}
+                  onChange={handleDateChange}
+                  maxLength="10"
+                  placeholder="JJ/MM/AAAA"
+                  labelLeft={<i className="fa-solid fa-cake-candles"></i>}
+                  contentRightStyling={false}
+                  contentRight={
+                    <i
+                      className="fa-solid fa-right-long"
+                      onClick={handleChangeBirthday}
+                    ></i>
+                  }
+                />
               </>
-            ) : selectedContent === "profil" ? (
-              <>
-                <h3 className="font-title">
-                  Votre salaire est actuellement: {salary.toLocaleString()}€
-                </h3>
+            ) : selectedContent === "infos" ? (
+              <div className="infos-modal-content">
                 <Input
                   type="number"
                   labelLeft={<i className="fa-solid fa-euro-sign"></i>}
                   status="primary"
-                  placeholder="Nouveau Salaire"
+                  placeholder={"Nouveau Salaire"}
                   aria-label="salary change"
                   contentRightStyling={false}
                   contentRight={
@@ -229,7 +256,40 @@ const ProfilModal = ({ visible, setVisible, setIsEdit }) => {
                   }
                   onChange={(e) => setNewSalary(e.target.value)}
                 />
-              </>
+                <Input
+                  labelLeft={<i className="fa-solid fa-house"></i>}
+                  status="primary"
+                  placeholder="Adresse"
+                  aria-label="salary change"
+                  contentRightStyling={false}
+                  contentRight={<i className="fa-solid fa-right-long"></i>}
+                />
+
+                <Input
+                  labelLeft={<i className="fa-solid fa-hashtag"></i>}
+                  status="primary"
+                  placeholder="Code Postal"
+                  aria-label="salary change"
+                  contentRightStyling={false}
+                  contentRight={<i className="fa-solid fa-right-long"></i>}
+                />
+                <Input
+                  labelLeft={<i className="fa-solid fa-city"></i>}
+                  status="primary"
+                  placeholder="Ville"
+                  aria-label="salary change"
+                  contentRightStyling={false}
+                  contentRight={<i className="fa-solid fa-right-long"></i>}
+                />
+                <Input
+                  labelLeft={<i className="fa-solid fa-globe"></i>}
+                  status="primary"
+                  placeholder="Pays"
+                  aria-label="salary change"
+                  contentRightStyling={false}
+                  contentRight={<i className="fa-solid fa-right-long"></i>}
+                />
+              </div>
             ) : (
               <div>
                 <h1>Bienvenue</h1>

@@ -6,6 +6,7 @@ const registerUrl = `${process.env.REACT_APP_AXIOS_URL}/api/user/register`;
 const updateSalaryUrl = `${process.env.REACT_APP_AXIOS_URL}/api/user/salary`;
 const updateUsernameUrl = `${process.env.REACT_APP_AXIOS_URL}/api/user/username`;
 const updateEmailUrl = `${process.env.REACT_APP_AXIOS_URL}/api/user/email`;
+const updateBirthdayUrl = `${process.env.REACT_APP_AXIOS_URL}/api/user/bithday`;
 const updatePasswordUrl = `${process.env.REACT_APP_AXIOS_URL}/api/user/password`;
 
 export const getUsers = () => {
@@ -81,6 +82,22 @@ export const setEmail = (email) => {
         dispatch({
           type: "SET_EMAIL",
           payload: email,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+};
+
+export const setBirthday = (birthday) => {
+  return (dispatch) => {
+    axios
+      .put(updateBirthdayUrl, { birthday: birthday })
+      .then((res) => {
+        dispatch({
+          type: "SET_BIRTHDAY",
+          payload: birthday,
         });
       })
       .catch((err) => {
